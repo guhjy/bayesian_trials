@@ -429,18 +429,4 @@ server <- function(input, output, session) {
   output$step_3 <- renderUI({tagList("在「熱圖」標籤中，使用滑桿選擇感興趣的結果水平，以視覺化後驗概率在先驗平均值和標準差的不同組合下低於該水平的可能性。")})
   output$tech_notes_1 <- renderUI({withMathJax(paste0("似然分佈構建為正態分佈：$$L \\sim N(\\theta, s)$$, 其中$$\\theta = log(HR)$$, $$s = \\widehat{SE}_{log(HR)}$$，標準誤差使用下方方程估計。"))})
   output$tech_notes_2 <- renderUI({withMathJax(paste0("似然分佈構建為正態分佈：$$L \\sim N(\\theta, s)$$, 其中$$\\theta = log\\frac{(a + \\frac{1}{2})(d + \\frac{1}{2})}{(b + \\frac{1}{2})(c + \\frac{1}{2})}$$, $$s = \\widehat{SE}_{log(OR)}$$，標準誤差使用下方方程估計。"))})
-  output$tech_notes_3 <- renderUI({withMathJax(paste0("似然分佈構建為正態分佈：$$L \\sim N(\\theta, s)$$, 其中$$\\theta = log\\frac{\\frac{a}{a + c}}{\\frac{b}{b + d}}$$, $$s = \\widehat{SE}_{log(RR)}$$，標準誤差使用下方方程估計。"))})
-  output$tech_notes_4 <- renderUI({withMathJax(paste0("似然分佈構建為正態分佈：$$L \\sim N(\\theta, s)$$, 其中$$\\theta = log(\\frac{\\mu_{int}}{\\mu_{ctrl}})$$, $$s = \\widehat{SE}_{log(RR)}$$，標準誤差從標準誤差或信賴區間估計。"))})
-  output$eqn_1a <- renderUI({withMathJax("標準誤差方程1：$$s = \\sqrt{\\frac{1}{E_1} + \\frac{1}{E_2}}$$")})
-  output$eqn_2a <- renderUI({withMathJax("標準誤差方程2：$$s = \\frac{log(UCI) - log(HR)}{qnorm(p)}$$")})
-  output$eqn_1b <- renderUI({withMathJax("標準誤差方程1：$$s = \\sqrt{\\frac{1}{a + \\frac{1}{2}} + \\frac{1}{b + \\frac{1}{2}} + \\frac{1}{c + \\frac{1}{2}} + \\frac{1}{d + \\frac{1}{2}}}$$")})
-  output$eqn_2b <- renderUI({withMathJax("標準誤差方程2：$$s = \\sqrt{\\frac{1}{a} + \\frac{1}{b} + \\frac{1}{c} + \\frac{1}{d}}$$")})
-  output$eqn_1c <- renderUI({withMathJax("標準誤差方程1：$$s = \\sqrt{\\frac{c}{a(a + c)} + \\frac{d}{b(b + d)}}$$")})
-  output$eqn_1d <- renderUI({withMathJax("標準誤差方程1：$$s = \\sqrt{\\frac{se_{int}^2}{n_{int}} + \\frac{se_{ctrl}^2}{n_{ctrl}}}$$")})
-  output$eqn_2d <- renderUI({withMathJax("標準誤差方程2：$$s = \\sqrt{\\frac{(\\frac{UCI_{int} - LCI_{int}}{2 \\times 1.96})^2}{n_{int}} + \\frac{(\\frac{UCI_{ctrl} - LCI_{ctrl}}{2 \\times 1.96})^2}{n_{ctrl}}}$$")})
-  output$mcid_explanation <- renderUI({tagList(h5("關注值（例如MCID）說明："), p("此滑桿設定一個您感興趣的特定效果大小（如風險比HR），通常是臨床研究中的「最小臨床重要差異」(MCID)。"))})
-  output$pr_explanation <- renderUI({tagList(h5("先驗小於此值的概率說明："), p("此滑桿指定先驗分佈小於「關注值」的概率，量化您對效果大小低於某閾值的信念。"))})
-  output$sd_explanation <- renderUI({tagList(h5("先驗標準差內定0.42說明："), p("預設為0.42，基於先驗平均值1、關注值 MCID 0.5和 MCID <0.5 的先驗機率 <0.05（亦即先驗機率有 90% 的機率介於 1/2 至 2）計算得出，提供適度信息量的先驗。但是要注意的是實務上的 HR/OR/RR/反應比是介於 0.8-1.2，此外觀測值愈接近後驗預測分布的中心表示統計模型愈可靠。"))})
-}
 
-shinyApp(ui = ui, server = server)
